@@ -40,5 +40,3 @@ function App() {
 }
 
 export default App
-
-// continue in extra 4
