@@ -1,19 +1,14 @@
 // useEffect: persistent state
 // http://localhost:3000/isolated/exercise/02.js
-// original and up to extra
+// extra 4 simplified
+//
 
 import * as React from 'react'
 
-const useLocalStorageState = ({
-  valueToStore,
-}: {
-  valueToStore: string
-}): [string, React.Dispatch<React.SetStateAction<string>>] => {
-  const parsed = JSON.parse(valueToStore)
-
-  const key = Object.keys(parsed)[0]
-  const value = parsed[key]
-
+const useLocalStorageState = (
+  key: string,
+  value: string,
+): [string, React.Dispatch<React.SetStateAction<string>>] => {
   const [state, setState] = React.useState(
     () => window.localStorage.getItem(key) ?? value,
   )
@@ -26,9 +21,7 @@ const useLocalStorageState = ({
 }
 
 function Greeting({initialName = ''}) {
-  const [name, setName] = useLocalStorageState({
-    valueToStore: JSON.stringify({name: initialName}),
-  })
+  const [name, setName] = useLocalStorageState('name', initialName)
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value)
@@ -49,5 +42,3 @@ function App() {
 }
 
 export default App
-
-// continue in extra 4
